@@ -1,40 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-     <link rel="stylesheet" href="styles.css">
-     
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Card Flip</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <h1>Card Flip</h1>
 
 
 <div id="myFlipCard" class="flip-card">
+
   <div class="flip-card-inner">
     <div class="flip-card-front">
-      <img src="assets/skal.png" />
+      <img src="assets/fireben.png" alt="Fireben"/>
     </div>
+
     <div class="flip-card-back">
-      <img src="assets/back.png" />
+      <img src="assets/card-back.png" alt="Card Back"/>
     </div>
   </div>
 </div>
 
-<script>
-  var card = document.getElementById("myFlipCard");
-
-  card.addEventListener("click", function () {
-    card.classList.add("flipped");
-
-    setTimeout(function () {
-      card.classList.remove("flipped");
-    }, 1000);
-  });
-</script>
-
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
