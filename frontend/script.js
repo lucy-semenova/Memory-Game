@@ -2,6 +2,7 @@
 const revealsEl = document.getElementById("reveals");
 const timerEl = document.getElementById("timer");
 const flipSound = new Audio("assets/flip.mp3");
+const TOTAL_PAIRS=8;
 
 // Game state
 let reveals = 0; // Count of revealed cards
@@ -11,10 +12,11 @@ let startTime = null; // Timestamp when timer starts
 let flippedCards = [];
 let counter = 0;
 let canClick = true;
+let matchedPairs=0;
 
 // Update displays
-function updateCounter(number) {
-  document.getElementById("reveals").textContent = number;
+function updateCounter() {
+  document.getElementById("reveals").textContent = counter;
 }
 
 // Flip card function
@@ -29,26 +31,64 @@ function flipCard(cardElement) {
   cardElement.classList.add("flipped");
   flippedCards.push(cardElement);
   counter++;
-  updateCounter(counter);
+  updateCounter();
 
-  setTimeout(() => {
-    if (flippedCards.length === 1) {
-      flippedCards[0].classList.remove("flipped");
-      flippedCards = [];
-      canClick = true;
-    }
-  }, 1500);
+  
 
   if (flippedCards.length === 2) {
     canClick = false;
 
-    setTimeout(() => {
-      flippedCards[0].classList.remove("flipped");
-      flippedCards[1].classList.remove("flipped");
-      flippedCards = [];
-      canClick = true;
-    }, 1500);
+    // Get two CardElement Id
+    const card1Id=flippedCards[0].getAttribute('data-card-id');
+    const card2Id=flippedCards[1].getAttribute('data-card-id');
+
+    if (card1Id===card2Id)
+      {
+        handleMatch();
+      }
+      else
+      {
+        handleMismatch();
+      }
+    
   }
+}
+//Match Handle
+function handleMatch(){
+  // Add matched class to both cards
+  flippedCards[0].classList.add("matched");
+  flippedCards[1].classList.add("matched");
+
+  // Increase match paired counter
+  matchedPairs++;
+
+  // Empty flippedCards
+  flippedCards=[];
+
+  //Unlook the board
+  canClick=true;
+
+  //check win condition
+  //checkWinCondition();
+}
+
+// handle mis match condition
+function handleMismatch(){
+
+  setTimeout(() =>{
+      // remove class flipped from cards.
+    flippedCards[0].classList.remove("flipped");
+    flippedCards[1].classList.remove("flipped");
+    // empty flipped card array
+    flippedCards=[];
+
+    //unlook the board
+    canClick=true;
+
+  }, 1500);
+  
+  
+
 }
 
 // Card data - 8 unique cards
@@ -93,10 +133,11 @@ function createCards() {
     cardDiv.className = "flip-card";
     cardDiv.id = `card-${index}`;
     cardDiv.setAttribute("data-card-id", card.id);
-    cardDiv.addEventListener("click", () => {
-      const flipCardElement = cardDiv.querySelector(".flip-card");
-      flipCard(flipCardElement);
-    });
+    
+   cardDiv.addEventListener("click", () => {
+  flipCard(cardDiv);
+});
+
 
     cardDiv.innerHTML = `
     <div class="flip-card">
