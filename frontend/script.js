@@ -47,6 +47,16 @@ function flipCard(cardElement,state) {
   state.counter++;
   updateCounter(state);
 
+  // Keep one card flipped only for 1500ms
+  setTimeout(()=>{
+    if (state.flippedCards.length === 1)
+    {cardElement.classList.remove("flipped");
+      // empty flipped card array
+    state.flippedCards = [];
+    }
+  },1500)
+
+
   if (state.flippedCards.length === 2) {
     state.canClick = false;
 
