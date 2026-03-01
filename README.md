@@ -65,8 +65,8 @@ Play online here:
 
 ## 👩‍💻 Contributors
 
-- 🌷 [Mila](https://github.com/lucy-semenova))  
-- 🚴 [Reza][(https://github.com/arpakraei) 
+- 🌷 [Mila](https://github.com/lucy-semenova) 
+- 🚴 [Reza](https://github.com/arpakraei) 
 
 
 
